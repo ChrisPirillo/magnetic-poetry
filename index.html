@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en"><head><script async="" src="https://www.googletagmanager.com/gtag/js?id=G-1CQ4D3VQ3L"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1CQ4D3VQ3L');
+  </script>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>Magnetic Poetry Pro: Digital Fridge Magnet Poem Maker</title>
+
+<meta name="description" content="Create and share beautiful poems with digital fridge magnets. Choose from 40+ themes, customize colors, and export your creative writing as images.">
+<meta name="keywords" content="magnetic poetry, poem maker, creative writing, fridge magnets, word game, poetry generator, digital art tool, writing prompts">
+<meta name="author" content="Chris Pirillo">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0f172a">
+
+<meta property="og:site_name" content="Chris Pirillo's Arcade">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Magnetic Poetry Pro: Digital Fridge Magnet Poem Maker">
+<meta property="og:description" content="Create and share beautiful poems with digital fridge magnets. Choose from 40+ themes, customize colors, and export your creative writing as images.">
+<meta property="og:url" content="https://pirillo.com/arcade/magnetic-poetry.html">
+<meta property="og:image" content="https://pirillo.com/arcade/images/magnetic-poetry.png">
+<meta property="og:image:alt" content="Magnetic Poetry Pro: Digital Fridge Magnet Poem Maker">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@ChrisPirillo">
+<meta name="twitter:creator" content="@ChrisPirillo">
+<meta name="twitter:title" content="Magnetic Poetry Pro: Digital Fridge Magnet Poem Maker">
+<meta name="twitter:description" content="Create and share beautiful poems with digital fridge magnets. Choose from 40+ themes, customize colors, and export your creative writing as images.">
+<meta name="twitter:image" content="https://pirillo.com/arcade/images/magnetic-poetry.png">
+<meta name="twitter:domain" content="pirillo.com">
+
+<link rel="canonical" href="https://pirillo.com/arcade/magnetic-poetry.html">
+
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Magnetic Poetry Pro: Digital Fridge Magnet Poem Maker",
+  "description": "Create and share beautiful poems with digital fridge magnets. Choose from 40+ themes, customize colors, and export your creative writing as images.",
+  "keywords": "magnetic poetry, poem maker, creative writing, fridge magnets, word game, poetry generator, digital art tool, writing prompts",
+  "url": "https://pirillo.com/arcade/magnetic-poetry.html",
+  "image": "https://pirillo.com/arcade/images/magnetic-poetry.png",
+  "primaryImageOfPage": {
+    "@type": "ImageObject",
+    "url": "https://pirillo.com/arcade/images/magnetic-poetry.png"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Chris Pirillo",
+    "url": "https://pirillo.com",
+    "sameAs": [
+      "https://x.com/ChrisPirillo"
+    ]
+  },
+  "mainEntity": {
+    "name": "Magnetic Poetry Pro: Digital Fridge Magnet Poem Maker",
+    "description": "Create and share beautiful poems with digital fridge magnets. Choose from 40+ themes, customize colors, and export your creative writing as images.",
+    "image": "https://pirillo.com/arcade/images/magnetic-poetry.png",
+    "operatingSystem": "Web Browser",
+    "author": {
+      "@type": "Person",
+      "name": "Chris Pirillo"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "@type": "VideoGame",
+    "genre": "Simulation",
+    "applicationCategory": "Game",
+    "playMode": "SinglePlayer"
+  }
+}</script>
+
+<meta charset="UTF-8">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image-more/3.1.6/dom-to-image-more.min.js" defer=""></script>
+<style>
+        body { overscroll-behavior: none; } 
+
+        .magnet {
+            background-color: #ffffff;
+            border: 1px solid #d1d5db;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            color: #111827;
+            font-family: Arial, Helvetica, sans-serif; 
+            font-size: 15px;
+            font-weight: 500;
+            line-height: 1;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 12px;
+            cursor: grab;
+            user-select: none;
+            touch-action: none;
+            white-space: nowrap;
+            border-radius: 2px;
+            will-change: transform, left, top;
+            transition: transform 0.2s, background-color 0.2s; 
+        }
+        
+        /* Dragging State */
+        .magnet.dragging {
+            position: fixed !important;
+            transform: scale(1.15) rotate(-2deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            cursor: grabbing;
+            z-index: 99999 !important;
+            pointer-events: none; 
+        }
+
+        /* In Strip */
+        .magnet.in-strip {
+            position: relative !important;
+            left: auto !important;
+            top: auto !important;
+            transform: none !important;
+            margin-right: 8px;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        /* On Board */
+        .magnet.on-board {
+            position: absolute;
+            z-index: 20;
+            box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.15);
+        }
+
+        input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+        input[type="color"]::-webkit-color-swatch { border: none; border-radius: 4px; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-gray-100 h-[100dvh] w-screen overflow-hidden flex flex-col font-sans text-gray-800">
+
+    <!-- Top Menu -->
+    <div data-html2canvas-ignore="true" id="top-bar" class="absolute top-0 left-0 w-full h-16 z-[100] bg-white/10 backdrop-blur-xl border-b border-white/20 flex flex-row items-center px-4 overflow-x-auto no-scrollbar gap-6 justify-between">
+        
+        <!-- Brand -->
+        <div class="flex items-center gap-2 shrink-0">
+            <h1 class="text-sm font-bold tracking-tight text-gray-900/90 pointer-events-none hidden lg:block">Magnetic Poetry</h1>
+            <button onclick="toggleHelp()" class="text-gray-600 hover:text-gray-900 transition-colors bg-white/30 border border-white/40 rounded-full p-1 shadow-sm" title="Help">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            </button>
+        </div>
+        
+        <!-- Set Selection -->
+        <select id="genre-select" class="bg-white/30 border border-white/30 text-gray-900 text-xs font-medium rounded-lg focus:ring-2 focus:ring-blue-500/50 block p-2 outline-none cursor-pointer w-32 shadow-sm shrink-0 backdrop-blur-sm hover:bg-white/40 transition-colors">
+            <!-- Populated by JS -->
+        </select>
+
+        <!-- Colors -->
+        <div class="flex gap-1.5 items-center bg-white/20 p-1.5 rounded-lg border border-white/20 shadow-inner shrink-0 backdrop-blur-sm">
+            <input type="color" id="bg-color-1" class="w-5 h-5 rounded cursor-pointer border-0 bg-transparent shadow-sm">
+            <input type="color" id="bg-color-2" class="w-5 h-5 rounded cursor-pointer border-0 bg-transparent shadow-sm">
+        </div>
+
+        <!-- Strip Sorters -->
+        <div class="flex items-center gap-1 bg-white/20 p-1 rounded-lg border border-white/20 shadow-inner shrink-0 backdrop-blur-sm">
+            <button onclick="sortStrip('scatter')" class="px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-white/50 rounded-md transition-colors whitespace-nowrap">Scatter</button>
+            <button onclick="sortStrip('alpha')" class="px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-white/50 rounded-md transition-colors whitespace-nowrap">A-Z</button>
+            <button onclick="sortStrip('type')" class="px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-white/50 rounded-md transition-colors whitespace-nowrap">Type</button>
+        </div>
+
+        <!-- Custom Word -->
+        <div class="flex items-center gap-1 shrink-0">
+            <input type="text" id="wildcard-input" maxlength="15" class="w-28 md:w-36 bg-white/30 border border-white/30 text-gray-900 text-xs rounded-lg block p-2 outline-none shadow-sm placeholder-gray-600 backdrop-blur-sm focus:bg-white/50 transition-colors" placeholder="+ custom">
+            <button id="btn-wildcard" class="bg-indigo-600/90 hover:bg-indigo-600 text-white font-semibold px-3 py-2 rounded-lg text-xs transition-all shadow-sm active:scale-95 disabled:opacity-50">Add</button>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex items-center gap-2 shrink-0">
+            <button id="btn-random" class="px-3 py-2 text-xs font-semibold bg-white/30 hover:bg-white/50 text-gray-900 rounded-lg border border-white/30 shadow-sm transition-all active:scale-95 backdrop-blur-sm">Random</button>
+            <button id="btn-reset" class="px-3 py-2 text-xs font-semibold bg-white/30 hover:bg-white/50 text-gray-900 rounded-lg border border-white/30 shadow-sm transition-all active:scale-95 backdrop-blur-sm">New</button>
+            <button id="btn-capture" class="w-20 py-2 text-xs font-bold bg-blue-600/90 hover:bg-blue-600 text-white rounded-lg shadow-md transition-all active:scale-95 flex justify-center items-center backdrop-blur-md">Export</button>
+        </div>
+    </div>
+
+    <!-- Play Area -->
+    <div id="fridge" class="relative flex-1 w-full overflow-hidden transition-colors duration-500">
+        <!-- Words dragged here -->
+    </div>
+    
+    <!-- The Strip -->
+    <div id="magnet-strip" data-html2canvas-ignore="true" class="fixed bottom-0 left-0 w-full h-16 bg-white/10 backdrop-blur-xl border-t border-white/20 z-[60] flex items-center px-4 overflow-x-auto no-scrollbar gap-0 transition-all">
+        <!-- All words spawn here -->
+    </div>
+
+    <!-- Help Modal -->
+    <div id="help-modal" class="fixed inset-0 z-[200] bg-black/40 backdrop-blur-sm hidden flex items-center justify-center opacity-0 transition-opacity duration-300">
+        <div class="bg-white/90 backdrop-blur-lg border border-white/50 rounded-2xl p-6 shadow-2xl max-w-sm w-full mx-4 transform scale-95 transition-transform duration-300 flex flex-col">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-gray-900 tracking-tight">Magnetic Poetry</h2>
+                <button onclick="toggleHelp()" class="text-gray-500 hover:text-gray-900 transition-colors bg-white/100 hover:bg-gray-200 rounded-full p-1">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            <p class="text-sm text-gray-600 mb-6 leading-relaxed">
+                1. Drag words from the bottom strip to the board.<br>
+                2. Drag words back to the strip to remove them.<br>
+                3. Use "Random" to generate a poem idea.<br>
+                4. Sort strip to find specific words.
+            </p>
+            <div class="flex flex-col gap-2.5">
+                <a href="https://pirillo.com/arcade/" target="_blank" class="block w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2.5 rounded-xl border border-gray-200 transition-all active:scale-95 shadow-sm">More Apps</a>
+                <a href="https://chris.pirillo.com/" target="_blank" class="block w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2.5 rounded-xl border border-gray-200 transition-all active:scale-95 shadow-sm">Follow Chris</a>
+                <a href="https://ctrlaltcreate.live/" target="_blank" class="block w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2.5 rounded-xl border border-gray-200 transition-all active:scale-95 shadow-sm">Learn More</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Global State Declarations ---
+        let fridgeEl, magnetStripEl, genreSelectEl, color1El, color2El;
+        let highestZ = 10;
+        let magnetElements = [];
+        let wildcardsLeft = 3;
+        let audioCtx = null;
+        
+        // --- Dictionaries ---
+        const baseWordsMap = {
+            pronouns: ['I', 'me', 'my', 'mine', 'you', 'your', 'he', 'him', 'his', 'she', 'her', 'it', 'we', 'us', 'our', 'they', 'them', 'their', 'this', 'that', 'these', 'those', 'who', 'what', 'all', 'some', 'any', 'every', 'no', 'one', 'myself', 'yourself', 'itself', 'someone', 'anyone', 'nothing', 'everything'],
+            connectors: ['a', 'an', 'the', 'and', 'or', 'but', 'if', 'because', 'as', 'until', 'while', 'of', 'in', 'to', 'for', 'with', 'on', 'at', 'from', 'by', 'about', 'into', 'like', 'through', 'after', 'over', 'out', 'under', 'then', 'so', 'is', 'are', 'was', 'were', 'be', 'been', 'have', 'had', 'do', 'did', 'will', 'can', 'not', 'no', 'yes', 'nor', 'yet', 'so', 'although', 'unless', 'since', 'when', 'where', 'why', 'how', 'maybe', 'perhaps', 'however', 'therefore', 'whenever', 'whatever'],
+            nouns: ['time', 'person', 'year', 'way', 'day', 'thing', 'man', 'world', 'life', 'hand', 'part', 'child', 'eye', 'woman', 'place', 'work', 'week', 'case', 'point', 'government', 'company', 'number', 'group', 'problem', 'fact', 'moment', 'mind', 'force', 'kind', 'head', 'house', 'service', 'friend', 'father', 'power', 'hour', 'game', 'line', 'end', 'member', 'law', 'car', 'city', 'community', 'name', 'president', 'team', 'minute', 'idea', 'kid', 'body', 'information', 'back', 'parent', 'face', 'others', 'level', 'office', 'door', 'health', 'person', 'art', 'war', 'history', 'party', 'result', 'change', 'morning', 'reason', 'research', 'girl', 'guy', 'moment', 'air', 'teacher', 'force', 'education'],
+            verbs: ['make', 'made', 'take', 'took', 'get', 'got', 'go', 'went', 'come', 'came', 'say', 'said', 'know', 'knew', 'think', 'thought', 'see', 'saw', 'look', 'want', 'give', 'gave', 'use', 'find', 'found', 'tell', 'ask', 'work', 'seem', 'feel', 'felt', 'try', 'leave', 'left', 'call', 'keep', 'kept', 'begin', 'began', 'help', 'show', 'hear', 'heard', 'play', 'run', 'ran', 'move', 'live', 'believe', 'bring', 'brought', 'happen', 'write', 'wrote', 'provide', 'sit', 'sat', 'stand', 'stood', 'lose', 'lost', 'pay', 'paid', 'meet', 'met', 'learn', 'change', 'lead', 'watch', 'follow', 'stop', 'create', 'speak', 'read', 'allow', 'add', 'spend', 'grow', 'open', 'walk', 'win', 'offer', 'remember', 'love', 'appear', 'buy', 'wait', 'serve', 'die', 'send', 'expect', 'build', 'stay', 'fall', 'cut', 'reach', 'kill', 'remain', 'dream', 'hope', 'wish'],
+            adjectives: ['good', 'new', 'first', 'last', 'long', 'great', 'little', 'own', 'other', 'old', 'right', 'big', 'high', 'different', 'small', 'large', 'next', 'early', 'young', 'important', 'few', 'public', 'bad', 'same', 'able', 'not', 'never', 'always', 'now', 'here', 'there', 'very', 'just', 'too', 'also', 'well', 'only', 'even', 'still', 'much', 'how', 'when', 'where', 'why', 'up', 'down', 'more', 'most', 'such', 'no', 'yes', 'away', 'off', 'often', 'far', 'soft', 'hard', 'clear', 'dark', 'light', 'strong', 'weak', 'fast', 'slow', 'warm', 'cold', 'happy', 'sad', 'beautiful', 'ugly', 'almost', 'barely', 'truly', 'wildly', 'softly', 'deeply', 'fully', 'mostly', 'roughly', 'simply', 'gently', 'slowly', 'quickly', 'suddenly', 'quietly', 'loudly', 'quite', 'rather', 'enough'],
+            suffixes: ['s', 's', 's', 's', 's', 'ed', 'ed', 'ed', 'ed', 'ing', 'ing', 'ing', 'ing', 'ly', 'ly', 'er', 'er', 'est', 'y', 'ish', 'un', 're', 'anti', 'non', 'less', 'ness', 'ful', 'ment', 'able', 'ive', 'ous']
+        };
+
+        const rawDictionaries = {
+            "Everyday": ['sun', 'moon', 'love', 'hate', 'beautiful', 'ugly', 'happy', 'sad', 'sleep', 'dream', 'time', 'day', 'night', 'car', 'house', 'tree', 'water', 'fire', 'boy', 'girl', 'man', 'woman', 'cat', 'dog', 'sweet', 'bitter', 'always', 'never', 'heart', 'mind', 'soul', 'body', 'hand', 'face', 'eye', 'tear', 'smile', 'laugh', 'cry', 'break', 'mother', 'father', 'friend', 'home', 'world', 'life', 'word', 'story', 'song', 'music', 'book', 'picture', 'light', 'dark', 'color', 'sound', 'voice', 'air', 'earth', 'wind', 'rain', 'snow', 'cloud', 'sky', 'star', 'morning', 'evening', 'street', 'city', 'door', 'window', 'room', 'bed', 'chair', 'table', 'food', 'drink', 'coffee', 'tea', 'bread', 'wine', 'work', 'play', 'school', 'money', 'phone', 'letter', 'game', 'road', 'path', 'journey', 'end', 'start', 'memory', 'wish', 'hope', 'fear', 'anger', 'peace', 'war', 'truth', 'lie', 'secret', 'promise', 'gift', 'box', 'key', 'lock', 'open', 'close', 'run', 'walk', 'jump', 'dance', 'sing', 'talk', 'listen', 'watch', 'see', 'hear', 'touch', 'feel', 'smell', 'taste'],
+            "Sci-Fi": ['star', 'ship', 'alien', 'galaxy', 'space', 'laser', 'robot', 'AI', 'future', 'cyber', 'neon', 'dark', 'light', 'void', 'quantum', 'engine', 'warp', 'planet', 'system', 'code', 'hologram', 'data', 'pulse', 'orbit', 'black', 'hole', 'gravity', 'station', 'clone', 'memory', 'drive', 'beyond', 'infinity', 'machine', 'cyborg', 'matrix', 'nebula', 'cosmos', 'stellar', 'portal', 'dimension', 'time', 'paradox', 'satellite', 'android', 'synthetic', 'neural', 'network', 'protocol', 'signal', 'transmission', 'reactor', 'thrust', 'vector', 'plasma', 'shield', 'armor', 'flesh', 'metal', 'circuit', 'wire', 'grid', 'net', 'scan', 'beam', 'ray', 'core', 'fusion', 'fission', 'atomic', 'nuclear', 'radio', 'wave', 'frequency', 'uplink', 'downlink', 'server', 'mainframe', 'drone', 'bot', 'mech', 'suit', 'helmet', 'visor', 'screen', 'display', 'interface', 'terminal', 'console', 'command', 'control', 'pilot', 'crew', 'captain', 'fleet', 'armada', 'base', 'colony', 'outpost', 'sector', 'zone', 'quadrant', 'coordinate', 'jump', 'hyperspace', 'wormhole', 'anomaly', 'singularity', 'event', 'horizon'],
+            "Gothic": ['blood', 'night', 'vampire', 'ghost', 'shadow', 'fear', 'death', 'cold', 'pale', 'castle', 'grave', 'tomb', 'whisper', 'scream', 'moon', 'wolf', 'bite', 'soul', 'crimson', 'curse', 'demon', 'veil', 'stone', 'mist', 'bone', 'flesh', 'haunt', 'creeping', 'silent', 'blade', 'rose', 'thorns', 'raven', 'crypt', 'dusk', 'midnight', 'candle', 'flicker', 'web', 'spider', 'ruin', 'decay', 'gloom', 'sorrow', 'weep', 'despair', 'phantom', 'spirit', 'echo', 'dust', 'ash', 'velvet', 'lace', 'poison', 'venom', 'fang', 'claw', 'beast', 'monster', 'witch', 'warlock', 'spell', 'potion', 'cauldron', 'black', 'magic', 'darkness', 'evil', 'sin', 'hell', 'abyss', 'nightmare', 'horror', 'terror', 'dread', 'panic', 'agony', 'pain', 'suffer', 'torture', 'dungeon', 'chain', 'shackle', 'iron', 'rust', 'rot', 'corpse', 'skeleton', 'skull', 'coffin', 'casket', 'funeral', 'mourn', 'grief', 'tear', 'crying', 'howl', 'groan', 'moan', 'shriek'],
+            "Developer": ['code', 'bug', 'feature', 'loop', 'hack', 'null', 'void', 'array', 'string', 'push', 'pop', 'deploy', 'server', 'crash', 'coffee', 'pizza', 'byte', 'bit', 'git', 'commit', 'sudo', 'error', 'promise', 'async', 'await', 'return', 'function', 'class', 'object', 'undefined', 'true', 'false', 'if', 'else', 'while', 'syntax', 'logic', 'compile', 'build', 'script', 'database', 'query', 'cache', 'root', 'branch', 'merge', 'conflict', 'debug', 'stack', 'trace', 'variable', 'constant', 'let', 'var', 'module', 'import', 'export', 'node', 'react', 'pixel', 'api', 'json', 'xml', 'http', 'https', 'url', 'link', 'click', 'scroll', 'mouse', 'keyboard', 'screen', 'monitor', 'laptop', 'desktop', 'terminal', 'shell', 'bash', 'command', 'line', 'argument', 'parameter', 'value', 'key', 'index', 'pointer', 'reference', 'memory', 'cpu', 'gpu', 'ram', 'disk', 'drive', 'file', 'folder', 'directory', 'path', 'network', 'wifi', 'internet', 'web', 'browser', 'client', 'frontend', 'backend', 'fullstack'],
+            "Romance": ['kiss', 'touch', 'passion', 'desire', 'lover', 'hold', 'embrace', 'sweet', 'soft', 'warm', 'breath', 'lips', 'skin', 'eyes', 'gaze', 'tender', 'whisper', 'forever', 'together', 'apart', 'longing', 'ache', 'burn', 'flame', 'spark', 'bond', 'promise', 'vow', 'ring', 'wedding', 'date', 'dance', 'rhythm', 'beat', 'heart', 'soulmate', 'destiny', 'fate', 'chance', 'meet', 'fall', 'deep', 'wild', 'crazy', 'madly', 'blind', 'trust', 'secret', 'blush', 'caress', 'stroke', 'shiver', 'sigh', 'moan', 'bed', 'sheet', 'morning', 'night', 'moonlight', 'starlight', 'romance', 'love', 'adore', 'cherish', 'worship', 'idolize', 'treasure', 'value', 'prize', 'admire', 'respect', 'honor', 'obey', 'serve', 'please', 'satisfy', 'fulfill', 'complete', 'perfect', 'match', 'pair', 'couple', 'duo', 'partner', 'spouse', 'husband', 'wife', 'bride', 'groom', 'marriage', 'affair', 'fling', 'crush', 'date', 'boyfriend', 'girlfriend', 'ex', 'breakup', 'divorce', 'heartbreak', 'pain', 'tears', 'crying', 'lonely', 'miss', 'want', 'need'],
+            "Nature": ['tree', 'leaf', 'branch', 'root', 'flower', 'petal', 'stem', 'thorn', 'grass', 'weed', 'moss', 'fern', 'forest', 'wood', 'jungle', 'mountain', 'hill', 'valley', 'river', 'stream', 'lake', 'ocean', 'sea', 'wave', 'tide', 'beach', 'sand', 'rock', 'stone', 'dirt', 'soil', 'earth', 'mud', 'dust', 'wind', 'breeze', 'gale', 'storm', 'rain', 'drop', 'cloud', 'sky', 'sun', 'ray', 'moon', 'star', 'bird', 'wing', 'feather', 'nest', 'fly', 'bug', 'ant', 'bee', 'fish', 'swim', 'scale', 'animal', 'fur', 'claw', 'tooth', 'bite', 'bark', 'growl', 'roar', 'wild', 'tame', 'hunt', 'prey', 'predator', 'food', 'eat', 'drink', 'water', 'fire', 'air', 'ice', 'snow', 'cold', 'hot', 'warm', 'dry', 'wet', 'green', 'blue', 'brown', 'red', 'yellow', 'orange', 'purple', 'black', 'white', 'season', 'spring', 'summer', 'autumn', 'winter'],
+            "Fantasy": ['dragon', 'elf', 'orc', 'dwarf', 'goblin', 'troll', 'giant', 'fairy', 'sprite', 'magic', 'spell', 'wand', 'staff', 'sword', 'shield', 'bow', 'arrow', 'axe', 'armor', 'helm', 'knight', 'king', 'queen', 'prince', 'princess', 'castle', 'tower', 'keep', 'dungeon', 'hoard', 'gold', 'silver', 'gem', 'jewel', 'ring', 'amulet', 'potion', 'brew', 'herb', 'root', 'quest', 'journey', 'path', 'road', 'forest', 'cave', 'mountain', 'river', 'bridge', 'tavern', 'inn', 'ale', 'mead', 'bard', 'song', 'tale', 'myth', 'legend', 'prophecy', 'hero', 'villain', 'monster', 'beast', 'creature', 'summon', 'conjure', 'enchant', 'curse', 'bless', 'heal', 'wound', 'battle', 'war', 'fight', 'win', 'lose', 'death', 'life', 'spirit', 'ghost', 'soul', 'god', 'demon', 'angel', 'heaven', 'hell', 'underworld', 'abyss', 'shadow', 'light', 'dark', 'power', 'strength', 'wisdom', 'courage', 'honor', 'glory'],
+            "Noir": ['detective', 'gun', 'bullet', 'smoke', 'cigarette', 'cigar', 'match', 'flame', 'shadow', 'alley', 'street', 'lamp', 'light', 'dark', 'night', 'rain', 'trenchcoat', 'hat', 'fedora', 'dame', 'broad', 'moll', 'boss', 'mob', 'gang', 'gangs', 'thug', 'thugs', 'goon', 'goons', 'crime', 'crimes', 'murder', 'blood', 'body', 'bodies', 'corpse', 'corpses', 'chalk', 'line', 'badge', 'cop', 'cops', 'police', 'siren', 'sirens', 'jail', 'cell', 'cells', 'bars', 'judge', 'jury', 'guilty', 'innocent', 'lie', 'truth', 'secret', 'clue', 'track', 'case', 'file', 'photo', 'glass', 'whiskey', 'bourbon', 'ice', 'bar', 'stool', 'jazz', 'blues', 'piano', 'sax', 'trumpet', 'note', 'song', 'city', 'town', 'slum', 'ghetto', 'rich', 'poor', 'money', 'cash', 'greed', 'lust', 'envy', 'hate', 'anger', 'revenge', 'kill', 'shoot', 'stab', 'fight', 'run', 'hide', 'seek', 'find', 'lose', 'win', 'betray', 'trust', 'friend', 'enemy'],
+            "Pirate": ['ship', 'boat', 'deck', 'mast', 'sail', 'rigging', 'anchor', 'wheel', 'helm', 'captain', 'mate', 'crew', 'sailor', 'pirate', 'buccaneer', 'corsair', 'sea', 'ocean', 'water', 'wave', 'tide', 'storm', 'wind', 'gale', 'reef', 'rock', 'island', 'shore', 'beach', 'sand', 'treasure', 'chest', 'gold', 'coin', 'doubloon', 'jewel', 'gem', 'map', 'x', 'mark', 'sword', 'cutlass', 'blade', 'gun', 'pistol', 'musket', 'cannon', 'ball', 'powder', 'keg', 'barrel', 'rum', 'grog', 'drink', 'bottle', 'flag', 'skull', 'bone', 'crossbones', 'parrot', 'monkey', 'hook', 'peg', 'leg', 'patch', 'eye', 'scar', 'beard', 'hat', 'coat', 'boot', 'rope', 'knot', 'plank', 'walk', 'swim', 'drown', 'sink', 'float', 'fight', 'raid', 'loot', 'plunder', 'steal', 'rob', 'kill', 'die', 'live', 'free', 'slave', 'chain', 'shackle'],
+            "Culinary": ['cook', 'bake', 'fry', 'boil', 'roast', 'grill', 'chop', 'slice', 'dice', 'mince', 'stir', 'mix', 'blend', 'whip', 'beat', 'pour', 'measure', 'taste', 'smell', 'flavor', 'sweet', 'sour', 'salty', 'bitter', 'spicy', 'hot', 'cold', 'warm', 'fresh', 'stale', 'raw', 'ripe', 'rot', 'food', 'meal', 'dish', 'plate', 'bowl', 'cup', 'glass', 'fork', 'knife', 'spoon', 'pan', 'pot', 'oven', 'stove', 'fire', 'heat', 'recipe', 'ingredient', 'meat', 'beef', 'pork', 'chicken', 'fish', 'veg', 'fruit', 'bread', 'cheese', 'milk', 'egg', 'butter', 'oil', 'salt', 'pepper', 'sugar', 'flour', 'dough', 'crust', 'sauce', 'soup', 'stew', 'salad', 'cake', 'pie', 'cookie', 'candy', 'chocolate', 'ice', 'cream', 'coffee', 'tea', 'juice', 'water', 'wine', 'beer', 'chef', 'baker', 'waiter', 'menu', 'order', 'bill', 'tip'],
+            "Office": ['desk', 'chair', 'table', 'computer', 'screen', 'keyboard', 'mouse', 'phone', 'call', 'ring', 'email', 'message', 'text', 'paper', 'pen', 'pencil', 'note', 'memo', 'file', 'folder', 'binder', 'cabinet', 'drawer', 'staple', 'clip', 'tape', 'glue', 'copy', 'print', 'fax', 'scan', 'meeting', 'room', 'board', 'boss', 'manager', 'worker', 'team', 'staff', 'job', 'work', 'task', 'goal', 'plan', 'schedule', 'time', 'clock', 'hour', 'day', 'week', 'month', 'year', 'pay', 'check', 'money', 'coffee', 'cup', 'mug', 'break', 'lunch', 'deadline', 'project', 'report', 'slide', 'chart', 'graph', 'data', 'sheet', 'document', 'pdf', 'zoom', 'slack', 'wifi', 'internet', 'network', 'server', 'cloud', 'login', 'password', 'user', 'admin', 'hire', 'fire', 'quit', 'resign', 'promote', 'raise', 'bonus', 'salary', 'wage', 'career'],
+            "Medical": ['doctor', 'nurse', 'patient', 'sick', 'ill', 'pain', 'hurt', 'wound', 'cut', 'bleed', 'blood', 'bone', 'break', 'heart', 'beat', 'pulse', 'breath', 'lung', 'brain', 'mind', 'body', 'skin', 'flesh', 'muscle', 'nerve', 'vein', 'pill', 'drug', 'medicine', 'dose', 'shot', 'needle', 'syringe', 'intravenous', 'tube', 'wire', 'monitor', 'screen', 'beep', 'chart', 'bed', 'room', 'ward', 'hall', 'hospital', 'clinic', 'cure', 'heal', 'fix', 'mend', 'save', 'life', 'death', 'die', 'dead', 'alive', 'wake', 'sleep', 'coma', 'surgery', 'scalpel', 'mask', 'glove', 'gown', 'scrub', 'lab', 'test', 'result', 'scan', 'xray', 'mri', 'ct', 'virus', 'germ', 'bug', 'flu', 'cold', 'fever', 'cough', 'sneeze', 'ache', 'sore', 'itch', 'rash', 'burn', 'bruise', 'scar', 'stitch', 'cast', 'crutch', 'wheelchair'],
+            "Cosmic": ['star', 'sun', 'moon', 'planet', 'earth', 'mars', 'venus', 'jupiter', 'saturn', 'ring', 'dust', 'gas', 'cloud', 'nebula', 'galaxy', 'cluster', 'supernova', 'black', 'hole', 'void', 'empty', 'space', 'time', 'warp', 'bend', 'curve', 'light', 'speed', 'fast', 'slow', 'year', 'age', 'eon', 'birth', 'death', 'life', 'alien', 'lifeform', 'being', 'mind', 'thought', 'dream', 'vision', 'telescope', 'lens', 'glass', 'eye', 'see', 'look', 'watch', 'observe', 'measure', 'know', 'learn', 'wonder', 'awe', 'fear', 'cold', 'ice', 'fire', 'comet', 'meteor', 'asteroid', 'orbit', 'rotate', 'spin', 'gravity', 'mass', 'force', 'energy', 'matter', 'dark', 'vacuum', 'silence', 'infinite', 'eternal', 'vast', 'deep', 'far', 'near', 'travel', 'ship', 'rocket', 'probe', 'land', 'launch', 'flight', 'mission', 'crew', 'base', 'colony'],
+            "Mystery": ['clue', 'hint', 'trace', 'track', 'print', 'mark', 'sign', 'symbol', 'code', 'cipher', 'secret', 'hidden', 'lost', 'found', 'seek', 'search', 'find', 'discover', 'uncover', 'reveal', 'hide', 'mask', 'veil', 'shadow', 'dark', 'light', 'truth', 'lie', 'deceit', 'trick', 'trap', 'door', 'key', 'lock', 'safe', 'vault', 'room', 'house', 'mansion', 'estate', 'will', 'heir', 'blood', 'family', 'kin', 'murder', 'kill', 'death', 'body', 'corpse', 'weapon', 'gun', 'knife', 'poison', 'motive', 'reason', 'why', 'who', 'what', 'where', 'when', 'how', 'detective', 'sleuth', 'spy', 'agent', 'cop', 'police', 'suspect', 'witness', 'victim', 'killer', 'criminal', 'crook', 'thief', 'robber', 'steal', 'theft', 'crime', 'scene', 'case', 'file', 'report', 'evidence', 'proof', 'alibi', 'guilt', 'innocence', 'justice'],
+            "Western": ['cowboy', 'cowboys', 'horse', 'horses', 'saddle', 'spur', 'spurs', 'boot', 'boots', 'hat', 'hats', 'rope', 'lasso', 'gun', 'guns', 'pistol', 'pistols', 'revolver', 'rifle', 'rifles', 'bullet', 'bullets', 'shot', 'bang', 'smoke', 'dust', 'dirt', 'sand', 'desert', 'sun', 'heat', 'dry', 'water', 'canteen', 'trail', 'path', 'paths', 'road', 'roads', 'town', 'towns', 'saloon', 'bar', 'drink', 'whiskey', 'glass', 'card', 'cards', 'poker', 'chip', 'chips', 'bet', 'win', 'lose', 'cheat', 'law', 'sheriff', 'badge', 'star', 'jail', 'cell', 'outlaw', 'outlaws', 'bandit', 'robber', 'robbers', 'train', 'bank', 'gold', 'mine', 'claim', 'strike', 'rich', 'poor', 'bounty', 'price', 'ranch', 'farm', 'cattle', 'cow', 'bull', 'steer', 'herd', 'drive', 'ride', 'walk', 'run', 'shoot', 'fight', 'duel', 'noon', 'high', 'low', 'fast', 'slow', 'draw', 'holster', 'belt', 'buckle', 'jean', 'denim', 'shirt', 'vest', 'coat', 'poncho'],
+            "Academic": ['school', 'schools', 'class', 'classes', 'room', 'rooms', 'hall', 'desk', 'desks', 'chair', 'chairs', 'board', 'chalk', 'pen', 'pens', 'book', 'books', 'page', 'pages', 'word', 'words', 'text', 'read', 'write', 'learn', 'study', 'test', 'tests', 'exam', 'exams', 'quiz', 'grade', 'grades', 'pass', 'fail', 'mark', 'marks', 'score', 'scores', 'teacher', 'teachers', 'prof', 'student', 'students', 'pupil', 'pupils', 'peer', 'peers', 'group', 'team', 'work', 'paper', 'papers', 'essay', 'essays', 'thesis', 'idea', 'ideas', 'thought', 'thoughts', 'theory', 'fact', 'facts', 'data', 'research', 'lab', 'science', 'math', 'art', 'history', 'law', 'mind', 'brain', 'smart', 'dumb', 'wise', 'fool', 'know', 'think', 'ask', 'answer', 'question', 'questions', 'prove', 'degree', 'diploma', 'graduate', 'college', 'university', 'campus', 'dorm', 'library', 'study', 'cram', 'cheat', 'skip', 'late', 'early', 'bell', 'recess', 'lunch', 'gym', 'sport', 'club', 'band', 'choir', 'drama', 'nerd', 'geek', 'jock', 'prep'],
+            "Music": ['note', 'notes', 'chord', 'chords', 'scale', 'scales', 'key', 'keys', 'pitch', 'tone', 'tones', 'sound', 'sounds', 'noise', 'beat', 'beats', 'rhythm', 'tempo', 'time', 'fast', 'slow', 'loud', 'soft', 'quiet', 'silent', 'song', 'songs', 'tune', 'tunes', 'melody', 'harmony', 'voice', 'voices', 'sing', 'hum', 'play', 'strum', 'pluck', 'blow', 'hit', 'strike', 'drum', 'drums', 'bass', 'guitar', 'piano', 'string', 'strings', 'brass', 'horn', 'horns', 'flute', 'band', 'bands', 'group', 'choir', 'stage', 'crowd', 'fan', 'fans', 'cheer', 'clap', 'dance', 'move', 'groove', 'feel', 'soul', 'heart', 'mind', 'ear', 'ears', 'listen', 'hear', 'record', 'track', 'album', 'disc', 'tape', 'vinyl', 'radio', 'stream', 'live', 'gig', 'tour', 'bus', 'road', 'rock', 'pop', 'jazz', 'blues', 'folk', 'rap', 'hip', 'hop', 'metal', 'punk', 'emo', 'indie', 'alternative', 'classical', 'opera'],
+            "Travel": ['go', 'leave', 'depart', 'arrive', 'come', 'stay', 'visit', 'tour', 'trip', 'trips', 'journey', 'journeys', 'voyage', 'flight', 'flights', 'fly', 'plane', 'planes', 'wing', 'wings', 'air', 'sky', 'cloud', 'clouds', 'train', 'trains', 'track', 'rail', 'car', 'cars', 'drive', 'road', 'roads', 'street', 'highway', 'bus', 'buses', 'boat', 'boats', 'ship', 'ships', 'sail', 'sea', 'seas', 'ocean', 'oceans', 'wave', 'waves', 'map', 'maps', 'guide', 'path', 'paths', 'way', 'route', 'routes', 'ticket', 'tickets', 'pass', 'bag', 'bags', 'case', 'pack', 'luggage', 'hotel', 'room', 'rooms', 'bed', 'sleep', 'rest', 'see', 'look', 'sight', 'view', 'views', 'place', 'places', 'city', 'cities', 'town', 'towns', 'country', 'world', 'earth', 'globe'],
+            "Slang": ['cool', 'rad', 'sick', 'dope', 'lit', 'fire', 'bet', 'cap', 'chill', 'vibe', 'vibes', 'mood', 'flex', 'swag', 'drip', 'snack', 'ghost', 'tea', 'shade', 'salty', 'extra', 'basic', 'lowkey', 'highkey', 'woke', 'canceled', 'stan', 'simp', 'sus', 'noob', 'epic', 'fail', 'win', 'goat', 'fam', 'squad', 'crew', 'bro', 'bruh', 'dude', 'man', 'girl', 'boy', 'boys', 'guy', 'guys', 'yall', 'yeah', 'nah', 'dunno', 'wanna', 'gonna', 'gotta', 'bout', 'cuz', 'tho', 'pls', 'thx', 'omg', 'lol', 'lmao', 'brb', 'idk'],
+            "Philosophy": ['truth', 'mind', 'soul', 'reason', 'logic', 'thought', 'being', 'self', 'free', 'will', 'moral', 'good', 'evil', 'life', 'death', 'god', 'fate', 'wise', 'think', 'know', 'doubt', 'idea', 'real', 'dream', 'time', 'space', 'void', 'pure', 'ethics', 'virtue', 'chaos', 'order', 'flux', 'tao', 'zen', 'ego', 'id', 'one', 'all', 'none'],
+            "Art": ['paint', 'draw', 'sketch', 'color', 'shade', 'line', 'form', 'shape', 'hue', 'tint', 'canvas', 'brush', 'ink', 'oil', 'clay', 'stone', 'muse', 'create', 'vision', 'style', 'mode', 'real', 'surreal', 'abstract', 'pop', 'fine', 'gallery', 'show', 'view', 'light', 'dark', 'shadow', 'scene', 'still', 'life', 'portrait', 'frame'],
+            "Garden": ['flower', 'bloom', 'petal', 'rose', 'lily', 'fern', 'moss', 'grass', 'weed', 'soil', 'dirt', 'mud', 'seed', 'root', 'stem', 'leaf', 'tree', 'bush', 'shrub', 'vine', 'fruit', 'veg', 'herb', 'grow', 'plant', 'water', 'sun', 'rain', 'bee', 'bug', 'worm', 'snail', 'sprout', 'bud', 'green', 'fresh', 'wild'],
+            "Zen": ['breath', 'mind', 'still', 'calm', 'peace', 'flow', 'now', 'here', 'one', 'void', 'empty', 'full', 'lotus', 'stone', 'sand', 'water', 'tea', 'sit', 'walk', 'be', 'do', 'no', 'yes', 'path', 'way', 'light', 'sound', 'silence', 'koan', 'master', 'student', 'wake', 'sleep', 'dream', 'real'],
+            "Cat": ['meow', 'purr', 'hiss', 'scratch', 'bite', 'lick', 'fur', 'tail', 'ear', 'paw', 'claw', 'whisker', 'nose', 'eye', 'sleep', 'nap', 'play', 'hunt', 'pounce', 'jump', 'climb', 'run', 'hide', 'box', 'toy', 'treat', 'nip', 'milk', 'fish', 'mouse', 'bird', 'soft', 'warm', 'cute', 'wild'],
+            "Dog": ['bark', 'woof', 'wag', 'tail', 'bone', 'fetch', 'sit', 'stay', 'good', 'boy', 'girl', 'walk', 'leash', 'park', 'ball', 'fur', 'paw', 'lick', 'sleep', 'treat', 'run', 'play', 'pant', 'sniff', 'roll', 'dig', 'howl', 'jump', 'love', 'guard', 'puppy', 'friend', 'best', 'loyal', 'pet'],
+            "Tech": ['agile', 'scrum', 'pivot', 'unicorn', 'disrupt', 'scale', 'burn', 'rate', 'vc', 'angel', 'pitch', 'deck', 'mvp', 'beta', 'launch', 'user', 'growth', 'hack', 'code', 'bug', 'tech', 'stack', 'cloud', 'saas', 'api', 'app', 'web', 'data', 'dev', 'ops'],
+            "Corporate": ['circle', 'back', 'synergy', 'deep', 'dive', 'touch', 'base', 'offline', 'bandwidth', 'leverage', 'paradigm', 'shift', 'wheelhouse', 'granular', 'holistic', 'optics', 'deliverable', 'action', 'item', 'ping', 'sync', 'align', 'scale', 'impact', 'value', 'proposition', 'core', 'competency', 'indicator', 'result', 'return', 'earnings', 'profit', 'quarter', 'fiscal', 'year', 'growth', 'churn', 'cost', 'lifetime', 'revenue', 'monthly', 'annual', 'burn', 'runway', 'cash', 'flow', 'balance', 'sheet', 'board', 'meeting', 'deck', 'slide', 'present', 'demo', 'pitch', 'deal', 'close', 'sign', 'contract', 'term', 'sheet', 'legal', 'human', 'resources', 'operations', 'strategy', 'plan', 'road', 'map', 'vision', 'miss', 'goal', 'target', 'hit', 'miss'],
+            "Politics": ['vote', 'ballot', 'poll', 'red', 'blue', 'state', 'law', 'bill', 'act', 'tax', 'spend', 'cut', 'elect', 'run', 'win', 'lose', 'party', 'wing', 'left', 'right', 'center', 'dem', 'gop', 'gov', 'power', 'seat', 'term', 'race', 'camp', 'ad'],
+            "Math": ['add', 'sum', 'plus', 'minus', 'graph', 'plot', 'line', 'curve', 'angle', 'point', 'vector', 'matrix', 'proof', 'solve', 'equal', 'limit', 'set', 'group', 'ring', 'field', 'calc', 'alg', 'geo', 'trig', 'stat', 'prob', 'num', 'prime', 'root', 'log'],
+            "Physics": ['atom', 'mass', 'force', 'spin', 'wave', 'light', 'heat', 'cool', 'melt', 'freeze', 'gas', 'solid', 'liquid', 'quark', 'gluon', 'string', 'theory', 'bang', 'hole', 'dark', 'time', 'space', 'rel', 'quant', 'mech', 'grav', 'elec', 'mag', 'nuc', 'part'],
+            "Chemistry": ['acid', 'base', 'salt', 'mix', 'bond', 'mole', 'atom', 'ion', 'gel', 'gas', 'fume', 'toxic', 'burn', 'melt', 'boil', 'test', 'tube', 'lab', 'coat', 'safe', 'reac', 'sol', 'elem', 'per', 'tab', 'org', 'inorg', 'bio', 'phys', 'ana'],
+            "Biology": ['cell', 'gene', 'dna', 'life', 'grow', 'eat', 'die', 'born', 'leaf', 'root', 'stem', 'bug', 'fish', 'bird', 'beast', 'man', 'skin', 'bone', 'blood', 'nerve', 'brain', 'heart', 'lung', 'liv', 'kid', 'musc', 'skel', 'repr', 'evol', 'eco'],
+            "History": ['war', 'peace', 'king', 'queen', 'rule', 'law', 'age', 'old', 'past', 'time', 'year', 'date', 'era', 'map', 'land', 'sea', 'ship', 'gold', 'god', 'myth', 'civ', 'emp', 'rep', 'dem', 'rev', 'col', 'ind', 'anc', 'med', 'mod'],
+            "Geography": ['map', 'north', 'south', 'east', 'west', 'pole', 'land', 'sea', 'hill', 'mount', 'river', 'lake', 'city', 'town', 'road', 'path', 'border', 'zone', 'place', 'world', 'cont', 'ocn', 'isl', 'pen', 'bay', 'gulf', 'str', 'cap', 'reg', 'loc'],
+            "Sports": ['ball', 'bat', 'net', 'goal', 'run', 'jump', 'kick', 'hit', 'win', 'lose', 'score', 'team', 'play', 'game', 'ref', 'foul', 'time', 'out', 'safe', 'fast', 'slow', 'pass', 'shoot', 'dunk', 'serve', 'ace', 'love', 'match', 'set', 'cup'],
+            "Yoga": ['pose', 'mat', 'breath', 'stretch', 'bend', 'flex', 'calm', 'peace', 'mind', 'body', 'soul', 'sun', 'moon', 'flow', 'hold', 'release', 'core', 'strong', 'soft', 'light', 'dark', 'in', 'out', 'up', 'down', 'left', 'right', 'bal', 'focus', 'zen'],
+            "Fashion": ['style', 'look', 'trend', 'wear', 'dress', 'shoe', 'bag', 'hat', 'coat', 'shirt', 'skirt', 'pant', 'silk', 'wool', 'cotton', 'fit', 'size', 'color', 'chic', 'glam', 'vogue', 'mod', 'high', 'low', 'fast', 'slow', 'sus', 'eth', 'vin', 'ret'],
+            "Construction": ['build', 'dig', 'fix', 'tool', 'hammer', 'nail', 'screw', 'saw', 'wood', 'brick', 'stone', 'wall', 'floor', 'roof', 'door', 'window', 'pipe', 'wire', 'plan', 'site', 'hard', 'soft', 'con', 'steel', 'glass', 'cem', 'sand', 'grav', 'dirt', 'mud'],
+            "Law": ['judge', 'jury', 'court', 'case', 'sue', 'law', 'rule', 'right', 'wrong', 'guilty', 'innocent', 'plea', 'jail', 'bail', 'fine', 'fee', 'lawyer', 'brief', 'suit', 'file', 'tort', 'crim', 'civ', 'con', 'prop', 'int', 'fam', 'tax', 'lab', 'env'],
+            "Finance": ['buy', 'sell', 'trade', 'stock', 'bond', 'cash', 'coin', 'bank', 'loan', 'debt', 'rich', 'poor', 'save', 'spend', 'cost', 'price', 'tax', 'audit', 'risk', 'gain', 'loss', 'prof', 'rev', 'exp', 'ass', 'liab', 'eq', 'div', 'yield', 'rate'],
+            "Crypto": ['coin', 'chain', 'block', 'mine', 'hash', 'key', 'wallet', 'token', 'drop', 'moon', 'hodl', 'fud', 'whale', 'bear', 'bull', 'pump', 'dump', 'gas', 'fee', 'swap', 'defi', 'nft', 'dao', 'web3', 'meta', 'gm', 'gn', 'wagmi', 'ngmi', 'rekt'],
+            "Gamer": ['play', 'win', 'lose', 'kill', 'die', 'respawn', 'lag', 'ping', 'fps', 'map', 'boss', 'loot', 'grind', 'level', 'xp', 'skill', 'buff', 'nerf', 'ban', 'gg', 'wp', 'ez', 'noob', 'pro', 'clan', 'guild', 'raid', 'pvp', 'pve', 'rpg'],
+            "Vintage": ['old', 'retro', 'classic', 'antique', 'rust', 'dust', 'fade', 'worn', 'rare', 'gold', 'silver', 'wood', 'glass', 'lace', 'vinyl', 'record', 'photo', 'film', 'sepia', 'tone', 'grain', 'noise', 'blur', 'foc', 'exp', 'dev', 'fix', 'stop', 'wash', 'dry'],
+            "Hipster": ['craft', 'brew', 'beard', 'flannel', 'vinyl', 'kale', 'vegan', 'fixie', 'bike', 'tote', 'bag', 'cafe', 'bean', 'roast', 'pour', 'over', 'chill', 'vibe', 'ironic', 'cool', 'art', 'indie', 'alt', 'und', 'loc', 'org', 'sus', 'fair', 'trade', 'raw'],
+            "Meme": ['doge', 'wow', 'much', 'such', 'very', 'lol', 'cat', 'cheez', 'burger', 'fail', 'win', 'epic', 'troll', 'face', 'palm', 'rage', 'quit', 'sus', 'yeet', 'cap', 'no', 'fam', 'lit', 'af', 'tbh', 'imo', 'irl', 'smh', 'fml', 'yolo'],
+            "Winter": ['snow', 'ice', 'cold', 'chill', 'freeze', 'frost', 'white', 'coat', 'hat', 'glove', 'sled', 'ski', 'slip', 'slide', 'fire', 'warm', 'cocoa', 'tea', 'dark', 'night', 'win', 'sol', 'equ', 'pol', 'arc', 'ant', 'tun', 'gla', 'berg', 'floe'],
+            "Summer": ['sun', 'hot', 'heat', 'beach', 'sand', 'swim', 'pool', 'dive', 'tan', 'burn', 'cool', 'drink', 'ice', 'cream', 'fun', 'play', 'trip', 'road', 'camp', 'fire', 'sum', 'sol', 'equ', 'tro', 'vac', 'hol', 'out', 'bbq', 'pic', 'nic'],
+            "Existential": ['why', 'who', 'what', 'where', 'when', 'how', 'if', 'then', 'else', 'maybe', 'yes', 'no', 'void', 'abyss', 'gaze', 'stare', 'lost', 'found', 'alone', 'one', 'all', 'none', 'some', 'any', 'evry', 'thing', 'noth', 'mean', 'purp', 'life']
+        };
+
+        const getThemeWords = (genre) => rawDictionaries[genre] || rawDictionaries["Everyday"];
+        const getRandomSubset = (arr, num) => [...arr].sort(() => 0.5 - Math.random()).slice(0, num);
+
+        const generateRandomPastel = () => {
+            const mix = [255, 255, 255]; 
+            const r = Math.floor((Math.random() * 256 + mix[0]) / 2);
+            const g = Math.floor((Math.random() * 256 + mix[1]) / 2);
+            const b = Math.floor((Math.random() * 256 + mix[2]) / 2);
+            return '#' + [r,g,b].map(x => x.toString(16).padStart(2, '0')).join('');
+        };
+
+        function updateBg() {
+            if(fridgeEl && color1El && color2El) {
+                fridgeEl.style.background = `linear-gradient(to bottom right, ${color1El.value}, ${color2El.value})`;
+            }
+        }
+
+        function spawnWords(genre) {
+            if (!fridgeEl || !magnetStripEl) return;
+            
+            const magnetsInFridge = fridgeEl.querySelectorAll('.magnet');
+            magnetsInFridge.forEach(el => el.remove());
+            
+            magnetStripEl.innerHTML = ''; 
+            magnetElements = [];
+            
+            wildcardsLeft = 3;
+            if(document.getElementById('wildcard-input')) {
+                document.getElementById('wildcard-input').placeholder = `+ custom (${wildcardsLeft})`;
+                document.getElementById('wildcard-input').disabled = false;
+                document.getElementById('btn-wildcard').disabled = false;
+            }
+            
+            let selectedBase = [];
+            for (const [type, wordsList] of Object.entries(baseWordsMap)) {
+                let count = wordsList.length; 
+                const subset = getRandomSubset(wordsList, count);
+                subset.forEach(w => selectedBase.push({ text: w, type: type }));
+            }
+
+            const themeWords = getThemeWords(genre);
+            const selectedTheme = getRandomSubset(themeWords, 300).map(w => ({ text: w, type: 'theme' }));
+
+            let words = [...selectedBase, ...selectedTheme];
+            words.sort(() => Math.random() - 0.5);
+
+            words.forEach(wordObj => {
+                const mag = document.createElement('div');
+                mag.className = 'magnet in-strip';
+                mag.textContent = wordObj.text;
+                mag.dataset.type = wordObj.type; 
+                mag.dataset.moved = "false"; 
+                
+                magnetStripEl.appendChild(mag);
+                magnetElements.push(mag);
+            });
+        }
+
+        function sortStrip(method) {
+            if (!magnetStripEl) return;
+            const stripChildren = Array.from(magnetStripEl.children);
+            
+            if (method === 'scatter') {
+                stripChildren.sort(() => Math.random() - 0.5);
+            } else if (method === 'alpha') {
+                stripChildren.sort((a, b) => a.textContent.localeCompare(b.textContent));
+            } else if (method === 'type') {
+                const typeOrder = ['custom', 'suffixes', 'pronouns', 'connectors', 'verbs', 'adjectives', 'nouns', 'theme'];
+                stripChildren.sort((a, b) => {
+                    const rankA = typeOrder.indexOf(a.dataset.type);
+                    const rankB = typeOrder.indexOf(b.dataset.type);
+                    if (rankA !== rankB) return rankA - rankB;
+                    return a.textContent.localeCompare(b.textContent);
+                });
+            }
+            
+            stripChildren.forEach(el => magnetStripEl.appendChild(el));
+        }
+
+        function generateRandomPoem() {
+            if (!fridgeEl || !magnetStripEl) return;
+            
+            const genres = Object.keys(rawDictionaries);
+            const randomGenre = genres[Math.floor(Math.random() * genres.length)];
+            genreSelectEl.value = randomGenre;
+            
+            color1El.value = generateRandomPastel();
+            color2El.value = generateRandomPastel();
+            updateBg();
+
+            spawnWords(randomGenre);
+
+            const rawPool = {
+                pronouns: magnetElements.filter(m => m.dataset.type === 'pronouns'),
+                verbs: magnetElements.filter(m => m.dataset.type === 'verbs'),
+                adjectives: magnetElements.filter(m => m.dataset.type === 'adjectives'),
+                nouns: magnetElements.filter(m => m.dataset.type === 'nouns'), 
+                theme: magnetElements.filter(m => m.dataset.type === 'theme'),
+                connectors: magnetElements.filter(m => m.dataset.type === 'connectors'),
+                suffixes: magnetElements.filter(m => m.dataset.type === 'suffixes')
+            };
+
+            const getWordsByText = (sourceArray, targetWords) => {
+                return sourceArray.filter(el => targetWords.includes(el.textContent.toLowerCase()));
+            };
+
+            const articles = getWordsByText(rawPool.connectors, ['the', 'a', 'an']);
+            const prepositions = getWordsByText(rawPool.connectors, ['in', 'on', 'at', 'from', 'by', 'with', 'under', 'over', 'through', 'for', 'to', 'of']);
+            const copulas = getWordsByText(rawPool.connectors, ['is', 'are', 'was', 'were', 'am', 'be']);
+            const conjunctions = getWordsByText(rawPool.connectors, ['and', 'but', 'or']);
+            
+            const subjectPronouns = getWordsByText(rawPool.pronouns, ['i', 'he', 'she', 'we', 'they', 'who']);
+            const objectPronouns = getWordsByText(rawPool.pronouns, ['me', 'him', 'her', 'us', 'them']);
+            const otherPronouns = rawPool.pronouns.filter(p => !subjectPronouns.includes(p) && !objectPronouns.includes(p));
+
+            const pool = {
+                articles: [...articles],
+                prepositions: [...prepositions],
+                copulas: [...copulas],
+                conjunctions: [...conjunctions],
+                subjectPronouns: [...subjectPronouns, ...otherPronouns], 
+                objectPronouns: [...objectPronouns, ...otherPronouns],
+                verbs: [...rawPool.verbs],
+                adjectives: [...rawPool.adjectives],
+                strictNouns: [...rawPool.nouns], 
+                theme: [...rawPool.theme],
+                allNouns: [...rawPool.nouns, ...rawPool.theme]
+            };
+
+            const pick = (type) => {
+                let arr = pool[type];
+                if (!arr || arr.length === 0) {
+                    if (type === 'strictNouns') arr = pool.allNouns; 
+                    else if (type === 'theme') arr = pool.allNouns; 
+                    else return null; 
+                }
+                if (!arr || arr.length === 0) return null;
+                const idx = Math.floor(Math.random() * arr.length);
+                const el = arr[idx];
+                arr.splice(idx, 1);
+                return el;
+            };
+
+            const templates = [
+                ['articles', 'adjectives', 'strictNouns', 'verbs', 'prepositions', 'articles', 'theme'],
+                ['subjectPronouns', 'verbs', 'articles', 'theme'],
+                ['prepositions', 'articles', 'strictNouns', 'subjectPronouns', 'verbs'],
+                ['theme', 'copulas', 'adjectives'],
+                ['verbs', 'objectPronouns', 'prepositions', 'theme']
+            ];
+
+            const lines = [];
+            const stanzaStructure = templates.sort(() => 0.5 - Math.random()).slice(0, 4);
+
+            stanzaStructure.forEach(pattern => {
+                const lineWords = [];
+                pattern.forEach(type => {
+                    const wordEl = pick(type);
+                    if (wordEl) lineWords.push(wordEl);
+                });
+                
+                for (let i = 0; i < lineWords.length - 1; i++) {
+                    const current = lineWords[i];
+                    const next = lineWords[i+1];
+                    const vowels = ['a','e','i','o','u'];
+                    if (current.textContent === 'a' && vowels.includes(next.textContent[0].toLowerCase())) {
+                        current.textContent = 'an'; 
+                    } else if (current.textContent === 'an' && !vowels.includes(next.textContent[0].toLowerCase())) {
+                        current.textContent = 'a';
+                    }
+                }
+                if (lineWords.length > 0) lines.push(lineWords);
+            });
+
+            const boardRect = fridgeEl.getBoundingClientRect();
+            const centerX = boardRect.width / 2;
+            const centerY = boardRect.height / 2;
+            const lineHeight = 42;
+            const wordSpacing = 6;
+            const totalHeight = lines.length * lineHeight;
+            let currentY = centerY - (totalHeight / 2);
+
+            lines.forEach(line => {
+                let rowWidth = 0;
+                line.forEach(el => {
+                    el.classList.remove('in-strip');
+                    el.classList.add('on-board');
+                    fridgeEl.appendChild(el); 
+                    rowWidth += el.offsetWidth + wordSpacing;
+                });
+                rowWidth -= wordSpacing;
+
+                let currentX = centerX - (rowWidth / 2);
+                currentX += (Math.random() * 20 - 10); 
+
+                line.forEach(el => {
+                    el.dataset.moved = "true";
+                    el.style.position = 'absolute';
+                    el.style.left = `${currentX}px`;
+                    el.style.top = `${currentY}px`;
+                    const rot = (Math.random() * 3) - 1.5;
+                    el.style.transform = `rotate(${rot}deg)`;
+                    currentX += el.offsetWidth + wordSpacing;
+                });
+                currentY += lineHeight;
+            });
+        }
+
+        function toggleHelp() {
+            const modal = document.getElementById('help-modal');
+            if (!modal) return;
+            const inner = modal.querySelector('div');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                void modal.offsetWidth; 
+                modal.classList.remove('opacity-0');
+                inner.classList.remove('scale-95');
+                inner.classList.add('scale-100');
+            } else {
+                modal.classList.add('opacity-0');
+                inner.classList.remove('scale-100');
+                inner.classList.add('scale-95');
+                setTimeout(() => modal.classList.add('hidden'), 300);
+            }
+        }
+
+        function playStickSound() {
+            if (!audioCtx) return;
+            // Force wakeup if suspended
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const t = audioCtx.currentTime;
+            
+            // 1. The "Thwip" (Swept Bandpass Noise)
+            // The frequency sweep creates the "air" sound
+            const bufferSize = audioCtx.sampleRate * 0.08; 
+            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                data[i] = Math.random() * 2 - 1;
+            }
+            
+            const noise = audioCtx.createBufferSource();
+            noise.buffer = buffer;
+            const noiseGain = audioCtx.createGain();
+            const noiseFilter = audioCtx.createBiquadFilter();
+            
+            noiseFilter.type = 'bandpass';
+            noiseFilter.Q.value = 0.5; // Wide Q for a breathy/paper sound
+            
+            // The Sweep: Start high (air), end low (contact)
+            noiseFilter.frequency.setValueAtTime(3000, t); 
+            noiseFilter.frequency.exponentialRampToValueAtTime(200, t + 0.04);
+            
+            noise.connect(noiseFilter);
+            noiseFilter.connect(noiseGain);
+            noiseGain.connect(audioCtx.destination);
+            
+            // Muted envelope - significant volume reduction
+            noiseGain.gain.setValueAtTime(0, t);
+            noiseGain.gain.linearRampToValueAtTime(0.15, t + 0.005); // Reduced from 0.5
+            noiseGain.gain.exponentialRampToValueAtTime(0.001, t + 0.06);
+            
+            noise.start(t);
+            
+            // 2. The Tap (Subtle Sine)
+            // Just enough to prove it hit a solid surface
+            const osc = audioCtx.createOscillator();
+            const oscGain = audioCtx.createGain();
+            
+            osc.connect(oscGain);
+            oscGain.connect(audioCtx.destination);
+            
+            osc.type = 'sine'; 
+            osc.frequency.setValueAtTime(180, t); // Lower pitch for less "ping"
+            
+            oscGain.gain.setValueAtTime(0, t);
+            oscGain.gain.linearRampToValueAtTime(0.015, t + 0.002); // Reduced from 0.05
+            oscGain.gain.exponentialRampToValueAtTime(0.001, t + 0.03); 
+            
+            osc.start(t);
+            osc.stop(t + 0.05);
+        }
+
+        function init() {
+            fridgeEl = document.getElementById('fridge');
+            magnetStripEl = document.getElementById('magnet-strip');
+            genreSelectEl = document.getElementById('genre-select');
+            color1El = document.getElementById('bg-color-1');
+            color2El = document.getElementById('bg-color-2');
+
+            const genres = Object.keys(rawDictionaries);
+            genres.forEach(genre => {
+                const opt = document.createElement('option');
+                opt.value = genre;
+                opt.textContent = genre;
+                genreSelectEl.appendChild(opt);
+            });
+
+            const randomGenre = genres[Math.floor(Math.random() * genres.length)];
+            genreSelectEl.value = randomGenre;
+
+            genreSelectEl.addEventListener('change', (e) => spawnWords(e.target.value));
+            color1El.addEventListener('input', updateBg);
+            color2El.addEventListener('input', updateBg);
+            
+            document.getElementById('btn-reset').addEventListener('click', () => {
+                color1El.value = generateRandomPastel();
+                color2El.value = generateRandomPastel();
+                updateBg();
+                spawnWords(genreSelectEl.value);
+            });
+            
+            document.getElementById('btn-random').addEventListener('click', generateRandomPoem);
+
+            document.getElementById('btn-wildcard').addEventListener('click', () => {
+                const input = document.getElementById('wildcard-input');
+                const val = input.value.trim();
+                if (!val || wildcardsLeft <= 0) return;
+
+                wildcardsLeft--;
+                input.placeholder = `+ custom (${wildcardsLeft})`;
+                input.value = '';
+                if (wildcardsLeft === 0) {
+                    input.placeholder = `Limit reached`;
+                    input.disabled = true;
+                    document.getElementById('btn-wildcard').disabled = true;
+                }
+
+                const mag = document.createElement('div');
+                mag.className = 'magnet on-board';
+                mag.style.position = 'absolute';
+                mag.style.left = (fridgeEl.offsetWidth / 2 - 30) + 'px';
+                mag.style.top = (fridgeEl.offsetHeight / 2 - 15) + 'px';
+                mag.textContent = val;
+                mag.dataset.type = 'custom';
+                mag.dataset.moved = 'true'; 
+                
+                fridgeEl.appendChild(mag);
+                magnetElements.push(mag);
+            });
+
+            document.getElementById('btn-capture').addEventListener('click', async () => {
+                const btn = document.getElementById('btn-capture');
+                const originalText = "Export";
+                const placedMagnets = magnetElements.filter(el => el.dataset.moved === "true");
+                if (placedMagnets.length === 0) return;
+                btn.innerHTML = `Saving`;
+                btn.disabled = true;
+
+                try {
+                    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+                    const fridgeRect = fridgeEl.getBoundingClientRect();
+                    placedMagnets.forEach(el => {
+                        const rect = el.getBoundingClientRect();
+                        const x = rect.left - fridgeRect.left;
+                        const y = rect.top - fridgeRect.top;
+                        if (x < minX) minX = x;
+                        if (y < minY) minY = y;
+                        if (x + rect.width > maxX) maxX = x + rect.width;
+                        if (y + rect.height > maxY) maxY = y + rect.height;
+                    });
+
+                    const poemWidth = maxX - minX;
+                    const poemHeight = maxY - minY;
+                    const targetCenterX = fridgeEl.offsetWidth / 2;
+                    const targetCenterY = fridgeEl.offsetHeight / 2;
+                    const shiftX = targetCenterX - (minX + poemWidth/2);
+                    const shiftY = targetCenterY - (minY + poemHeight/2);
+
+                    const exportContainer = document.createElement('div');
+                    exportContainer.style.width = `${fridgeEl.offsetWidth}px`;
+                    exportContainer.style.height = `${fridgeEl.offsetHeight}px`;
+                    exportContainer.style.background = `linear-gradient(to bottom right, ${color1El.value}, ${color2El.value})`;
+                    exportContainer.style.position = 'fixed';
+                    exportContainer.style.left = '-9999px'; 
+                    exportContainer.style.top = '0';
+                    exportContainer.style.fontFamily = 'Arial, Helvetica, sans-serif';
+
+                    placedMagnets.forEach(el => {
+                        const clone = el.cloneNode(true);
+                        const origLeft = parseFloat(el.style.left) || 0;
+                        const origTop = parseFloat(el.style.top) || 0;
+                        clone.style.position = 'absolute';
+                        clone.style.left = `${origLeft + shiftX}px`;
+                        clone.style.top = `${origTop + shiftY}px`;
+                        clone.style.transform = el.style.transform || 'none';
+                        clone.style.opacity = '1';
+                        clone.classList.remove('dragging');
+                        clone.style.transition = 'none'; 
+                        exportContainer.appendChild(clone);
+                    });
+
+                    document.body.appendChild(exportContainer);
+                    const dataUrl = await domtoimage.toPng(exportContainer, {
+                        width: fridgeEl.offsetWidth * 3,
+                        height: fridgeEl.offsetHeight * 3,
+                        style: { transform: `scale(3)`, transformOrigin: 'top left', width: `${fridgeEl.offsetWidth}px`, height: `${fridgeEl.offsetHeight}px` }
+                    });
+                    exportContainer.remove();
+
+                    const sorted = [...placedMagnets].sort((a,b) => {
+                        const ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect();
+                        return Math.abs(ra.top - rb.top) < 15 ? ra.left - rb.left : ra.top - rb.top;
+                    });
+                    const slug = sorted.slice(0,3).map(e => e.textContent.replace(/\W/g,'')).join('-') || 'poem';
+                    const ts = new Date().toISOString().replace(/[:.]/g,'-');
+                    const link = document.createElement('a');
+                    link.download = `${slug}-${ts}.png`;
+                    link.href = dataUrl;
+                    link.click();
+                } catch (err) {
+                    console.error(err);
+                } finally {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }
+            });
+
+            document.addEventListener('keydown', (e) => { 
+                if (e.key === 'Escape') { 
+                    const m = document.getElementById('help-modal'); 
+                    if(m && !m.classList.contains('hidden')) toggleHelp(); 
+                } 
+            });
+
+            color1El.value = generateRandomPastel();
+            color2El.value = generateRandomPastel();
+            updateBg();
+            spawnWords(randomGenre);
+        }
+
+        let activeMagnet = null;
+        let offset = { x: 0, y: 0 };
+
+        document.addEventListener('pointerdown', (e) => {
+            // Init audio context on first user interaction
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            const target = e.target.closest('.magnet');
+            if (target) {
+                activeMagnet = target;
+                if (activeMagnet.parentElement === magnetStripEl) {
+                    const rect = activeMagnet.getBoundingClientRect();
+                    activeMagnet.classList.remove('in-strip');
+                    fridgeEl.appendChild(activeMagnet);
+                    const fridgeRect = fridgeEl.getBoundingClientRect();
+                    activeMagnet.style.position = 'absolute';
+                    activeMagnet.style.left = (rect.left - fridgeRect.left) + 'px';
+                    activeMagnet.style.top = (rect.top - fridgeRect.top) + 'px';
+                    offset.x = e.clientX - rect.left;
+                    offset.y = e.clientY - rect.top;
+                } else {
+                    const rect = activeMagnet.getBoundingClientRect();
+                    offset.x = e.clientX - rect.left;
+                    offset.y = e.clientY - rect.top;
+                }
+                highestZ++;
+                activeMagnet.style.zIndex = highestZ;
+                activeMagnet.classList.add('dragging');
+                activeMagnet.classList.add('on-board');
+                activeMagnet.setPointerCapture(e.pointerId);
+                e.preventDefault(); 
+            }
+        });
+
+        document.addEventListener('pointermove', (e) => {
+            if (!activeMagnet) return;
+            const fridgeRect = fridgeEl.getBoundingClientRect();
+            let newLeft = e.clientX - fridgeRect.left - offset.x;
+            let newTop = e.clientY - fridgeRect.top - offset.y;
+            activeMagnet.style.left = `${newLeft}px`;
+            activeMagnet.style.top = `${newTop}px`;
+        });
+
+        document.addEventListener('pointerup', (e) => {
+            if (activeMagnet) {
+                activeMagnet.classList.remove('dragging');
+                const stripRect = magnetStripEl.getBoundingClientRect();
+                if (e.clientY >= stripRect.top) {
+                    activeMagnet.classList.remove('on-board');
+                    activeMagnet.classList.add('in-strip');
+                    activeMagnet.style.left = '';
+                    activeMagnet.style.top = '';
+                    activeMagnet.style.position = '';
+                    activeMagnet.dataset.moved = "false";
+                    magnetStripEl.appendChild(activeMagnet);
+                } else {
+                    activeMagnet.dataset.moved = "true";
+                    const fridgeRect = fridgeEl.getBoundingClientRect();
+                    const magRect = activeMagnet.getBoundingClientRect();
+                    let finalLeft = parseFloat(activeMagnet.style.left);
+                    let finalTop = parseFloat(activeMagnet.style.top);
+                    if (finalLeft < 0) finalLeft = 0;
+                    if (finalTop < 0) finalTop = 0;
+                    if (finalLeft + magRect.width > fridgeRect.width) finalLeft = fridgeRect.width - magRect.width;
+                    if (finalTop + magRect.height > fridgeRect.height) finalTop = fridgeRect.height - magRect.height;
+                    activeMagnet.style.left = `${finalLeft}px`;
+                    activeMagnet.style.top = `${finalTop}px`;
+                }
+                
+                // Moved outside the 'else' block so it plays for all drops
+                playStickSound();
+
+                activeMagnet.releasePointerCapture(e.pointerId);
+                activeMagnet = null;
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+
+</body></html>
